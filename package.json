@@ -6,11 +6,12 @@
   "engines": {
     "node": ">=22.13.0"
   },
-  "scripts": {
-    "dev": "vinext dev --host 127.0.0.1",
-    "build": "vinext build",
-    "preview": "vinext start --host 127.0.0.1"
-  },
+ "scripts": {
+  "dev": "vinext dev --host 127.0.0.1",
+  "build": "vinext build",
+  "build:tencent": "vite build --config vite.tencent.config.js",
+  "preview": "vinext start --host 127.0.0.1"
+},
   "dependencies": {
     "react": "19.2.6",
     "react-dom": "19.2.6",
