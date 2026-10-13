@@ -7,10 +7,12 @@ function ProjectsIndex({ projects, onSelect }) {
     <section className="projects-index" id="projects" aria-labelledby="projects-index-title">
       <div className="projects-index__intro">
         <div>
-          <p>{String(projects.length).padStart(2, '0')} projects · {String(cityCount).padStart(2, '0')} cities</p>
-          <h1 id="projects-index-title">Selected<br />Projects</h1>
+          <p>{String(projects.length).padStart(2, '0')} 个项目 · {String(cityCount).padStart(2, '0')} 个城市</p>
+          <h1 id="projects-index-title">
+            <span className="projects-index__title-zh">精选项目</span>
+            <span className="projects-index__title-en" lang="en">Selected Projects</span>
+          </h1>
         </div>
-        <p className="projects-index__note">Landscape architecture<br />Selected works 2020—2026</p>
       </div>
 
       <div className={`projects-grid${projects.length === 1 ? ' projects-grid--single' : ''}`}>
@@ -20,7 +22,7 @@ function ProjectsIndex({ projects, onSelect }) {
             type="button"
             key={project.id}
             onClick={() => onSelect(project)}
-            aria-label={`Open ${project.title}`}
+            aria-label={`打开 ${project.titleZh ?? project.title}`}
           >
             <span className="project-card__image-wrap">
               <img src={project.image} alt="" className="project-card__image" />
@@ -31,7 +33,7 @@ function ProjectsIndex({ projects, onSelect }) {
               <span>{project.year}</span>
             </span>
             <span className="project-card__title-row">
-              <strong>{project.title}</strong>
+              <strong>{project.titleZh ?? project.title}</strong>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 7l5 5-5 5" /></svg>
             </span>
             <span className="project-card__type">{project.type}</span>

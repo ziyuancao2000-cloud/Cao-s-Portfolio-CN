@@ -258,7 +258,7 @@ function GlobeCanvas({ projects, onHover, onSelect }) {
       const dt = Math.min(32, now - last);
       last = now;
       if (!s.hoveringGlobe && !s.dragging && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        s.yaw += dt * 0.000038;
+        s.yaw += dt * 0.00005;
       }
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
@@ -545,7 +545,7 @@ function GlobeCanvas({ projects, onHover, onSelect }) {
   return (
     <div className="globe-canvas-stack">
       <canvas ref={terrainRef} className="terrain-canvas" aria-hidden="true" />
-      <canvas ref={canvasRef} className="globe-canvas" aria-label="Interactive globe showing portfolio project locations" />
+      <canvas ref={canvasRef} className="globe-canvas" aria-label="展示作品项目位置的交互式地球" />
     </div>
   );
 }

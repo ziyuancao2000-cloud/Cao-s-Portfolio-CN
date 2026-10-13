@@ -3,17 +3,20 @@ import GlobeCanvas from './components/GlobeCanvas';
 import ProjectPreview from './components/ProjectPreview';
 import ProjectDetail from './components/ProjectDetail';
 import ProjectsIndex from './components/ProjectsIndex';
+import SketchbookPage from './components/SketchbookPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import { projects } from './data/projects';
+import { sketchbookItems } from './data/sketchbook';
 
-const PAGE_ORDER = ['index', 'projects', 'about', 'contact'];
-const PAGE_HASH = { index: '#home', projects: '#projects', about: '#about', contact: '#contact' };
+const PAGE_ORDER = ['index', 'projects', 'sketchbook', 'about', 'contact'];
+const PAGE_HASH = { index: '#home', projects: '#projects', sketchbook: '#sketchbook', about: '#about', contact: '#contact' };
 const CITY_COUNT = new Set(projects.map((project) => project.clusterCity ?? project.city)).size;
 
 export default function App() {
   const [page, setPage] = useState(() => {
     if (window.location.hash === '#projects') return 'projects';
+    if (window.location.hash === '#sketchbook') return 'sketchbook';
     if (window.location.hash === '#about') return 'about';
     if (window.location.hash === '#contact') return 'contact';
     return 'index';
@@ -65,6 +68,10 @@ export default function App() {
     event.preventDefault();
     navigateTo('projects');
   }, [navigateTo]);
+  const showSketchbook = useCallback((event) => {
+    event.preventDefault();
+    navigateTo('sketchbook');
+  }, [navigateTo]);
   const showAbout = useCallback((event) => {
     event.preventDefault();
     navigateTo('about');
@@ -89,7 +96,13 @@ export default function App() {
       if (page === 'index') {
         if (event.clientX > window.innerWidth * .34) return;
       } else {
-        const selector = page === 'projects' ? '.projects-index' : page === 'about' ? '.about-page' : '.contact-page';
+        const selector = page === 'projects'
+          ? '.projects-index'
+          : page === 'sketchbook'
+            ? '.sketchbook-page'
+            : page === 'about'
+              ? '.about-page'
+              : '.contact-page';
         const scroller = shell.querySelector(selector);
         if (!scroller) return;
         const atTop = scroller.scrollTop <= 2;
@@ -126,19 +139,36 @@ export default function App() {
       </div>
       <div className="layout-grid" aria-hidden="true" />
       <header className="site-header">
-        <nav aria-label="Primary navigation">
-          <a className={page === 'index' ? 'is-active' : ''} href="#home" onClick={showIndex}>Index</a>
-          <a className={page === 'projects' ? 'is-active' : ''} href="#projects" onClick={showProjects}>Projects</a>
-          <a className={page === 'about' ? 'is-active' : ''} href="#about" onClick={showAbout}>About</a>
-          <a className={page === 'contact' ? 'is-active' : ''} href="#contact" onClick={showContact}>Contact</a>
+        <nav aria-label="主导航">
+          <a className={page === 'index' ? 'is-active' : ''} href="#home" onClick={showIndex}>
+            <span>首页</span><small lang="en">Home</small>
+          </a>
+          <a className={page === 'projects' ? 'is-active' : ''} href="#projects" onClick={showProjects}>
+            <span>项目</span><small lang="en">Projects</small>
+          </a>
+          <a className={page === 'sketchbook' ? 'is-active' : ''} href="#sketchbook" onClick={showSketchbook}>
+            <span>速写本</span><small lang="en">Sketchbook</small>
+          </a>
+          <a className={page === 'about' ? 'is-active' : ''} href="#about" onClick={showAbout}>
+            <span>关于</span><small lang="en">About</small>
+          </a>
+          <a className={page === 'contact' ? 'is-active' : ''} href="#contact" onClick={showContact}>
+            <span>联系</span><small lang="en">Contact</small>
+          </a>
         </nav>
       </header>
 
       {page === 'index' ? (
         <section className="hero" id="home" aria-labelledby="portfolio-title">
           <div className="identity-panel">
-            <h1 id="portfolio-title"><span>Ziyuan</span><span>Cao</span></h1>
-            <p className="degree">MLA — Portfolio</p>
+            <h1 id="portfolio-title">
+              <span className="identity-title__zh">曹子圆精选作品</span>
+              <span className="identity-title__en" lang="en">Ziyuan Cao’s Portfolio</span>
+            </h1>
+            <p className="degree">
+              <span className="degree__zh">景观建筑</span>
+              <span className="degree__en" lang="en">Landscape Architecture</span>
+            </p>
           </div>
 
           <div className="globe-stage">
@@ -146,17 +176,18 @@ export default function App() {
           </div>
 
           <div className="work-label">
-            <span>Landscape Architecture /</span>
-            <span>Selected Works 2020—2026</span>
+            <span>景观设计 /</span>
+            <span>2023—2026</span>
           </div>
-          <p className="city-line">Based in Boston · Selected works worldwide</p>
           <p className="project-count">
             <strong>{String(projects.length).padStart(2, '0')}</strong>
-            <span>{projects.length === 1 ? 'Project' : 'Projects'}<br />across {String(CITY_COUNT).padStart(2, '0')} {CITY_COUNT === 1 ? 'city' : 'cities'}</span>
+            <span>个项目<br />分布于 {String(CITY_COUNT).padStart(2, '0')} 个城市</span>
           </p>
         </section>
       ) : page === 'projects' ? (
         <ProjectsIndex projects={projects} onSelect={setSelectedProject} />
+      ) : page === 'sketchbook' ? (
+        <SketchbookPage items={sketchbookItems} />
       ) : page === 'about' ? (
         <AboutPage />
       ) : (

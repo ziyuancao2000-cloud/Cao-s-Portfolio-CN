@@ -125,14 +125,25 @@ button { color: inherit; }
 .site-header nav {
   display: flex;
   gap: clamp(28px, 3vw, 54px);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
 }
 
 .site-header nav a {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   padding: 8px 0;
   transition: color 180ms ease;
+}
+
+.site-header nav a small {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  opacity: .68;
 }
 
 .site-header nav a::after {
@@ -162,30 +173,54 @@ button { color: inherit; }
   left: clamp(36px, 4.35vw, 72px);
   top: 35.5%;
   transform: translateY(-50%);
-  width: min(350px, 27vw);
+  width: min(460px, 34vw);
   pointer-events: none;
 }
 
 .identity-panel h1 {
   margin: 0;
   font-family: inherit;
-  font-size: clamp(62px, 6vw, 98px);
   font-weight: 400;
-  line-height: .82;
-  letter-spacing: -.055em;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
 .identity-panel h1 span { display: block; }
-.identity-panel h1 span:last-child { margin-left: -.02em; }
+
+.identity-title__zh {
+  white-space: nowrap;
+  font-size: clamp(40px, 3.4vw, 56px);
+  letter-spacing: -.06em;
+}
+
+.identity-title__en {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: #aaa79f;
+}
 
 .degree {
-  margin: 38px 0 0;
-  font-size: 13px;
-  line-height: 1;
-  letter-spacing: .32em;
-  text-transform: uppercase;
+  margin: 34px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   color: #b2afa7;
+}
+
+.degree__en {
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+}
+
+.degree__zh {
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: .24em;
 }
 
 .globe-stage {
@@ -275,7 +310,6 @@ button { color: inherit; }
 }
 
 .work-label,
-.city-line,
 .project-count {
   position: absolute;
   z-index: 4;
@@ -286,7 +320,7 @@ button { color: inherit; }
 
 .work-label {
   left: clamp(36px, 4.35vw, 72px);
-  bottom: 112px;
+  bottom: 66px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -294,14 +328,6 @@ button { color: inherit; }
   line-height: 1.2;
   letter-spacing: .22em;
   color: #aaa79f;
-}
-
-.city-line {
-  left: clamp(36px, 4.35vw, 72px);
-  bottom: 66px;
-  font-size: 9px;
-  letter-spacing: .2em;
-  color: #77746e;
 }
 
 .project-count {
@@ -425,18 +451,38 @@ button { color: inherit; }
 
 .projects-index__intro h1 {
   margin: 0;
-  font-size: clamp(64px, 8.4vw, 136px);
   font-weight: 400;
-  line-height: .78;
-  letter-spacing: -.065em;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
-.projects-index__intro .projects-index__note {
-  flex: 0 0 auto;
-  margin: 0;
-  text-align: right;
-  color: #6f6c66;
+.projects-index__title-zh,
+.projects-index__title-en,
+.about-page__title-zh,
+.about-page__title-en,
+.contact-page__title-zh,
+.contact-page__title-en {
+  display: block;
+}
+
+.projects-index__title-zh,
+.about-page__title-zh,
+.contact-page__title-zh {
+  white-space: nowrap;
+  font-size: clamp(58px, 6vw, 96px);
+  line-height: 1.08;
+  letter-spacing: .08em;
+}
+
+.projects-index__title-en,
+.about-page__title-en,
+.contact-page__title-en {
+  margin-top: 18px;
+  font-size: clamp(16px, 1.4vw, 22px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #aaa79f;
 }
 
 .projects-grid {
@@ -446,6 +492,210 @@ button { color: inherit; }
 }
 
 .projects-grid--single { grid-template-columns: minmax(0, 760px); }
+
+.sketchbook-page {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 142px clamp(36px, 4.35vw, 72px) 90px;
+  background: linear-gradient(180deg, rgba(11,11,10,.84), rgba(11,11,10,.96));
+  animation: projects-in 420ms cubic-bezier(.2,.75,.2,1) both;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(237,233,223,.24) transparent;
+}
+
+.sketchbook-page::-webkit-scrollbar { width: 6px; }
+.sketchbook-page::-webkit-scrollbar-track { background: transparent; }
+.sketchbook-page::-webkit-scrollbar-thumb { background: rgba(237,233,223,.2); }
+
+.sketchbook-page__intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(38px, 6vw, 100px);
+  margin-bottom: clamp(76px, 9vw, 138px);
+  padding-bottom: 34px;
+  border-bottom: 1px solid rgba(237,233,223,.13);
+}
+
+.sketchbook-page__intro h1 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sketchbook-page__title-zh,
+.sketchbook-page__title-en { display: block; }
+
+.sketchbook-page__title-zh {
+  white-space: nowrap;
+  font-size: clamp(58px, 6vw, 96px);
+  line-height: 1.08;
+  letter-spacing: .08em;
+}
+
+.sketchbook-page__title-en {
+  margin-top: 18px;
+  color: #aaa79f;
+  font-size: clamp(16px, 1.4vw, 22px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.sketchbook-page__description {
+  max-width: 430px;
+  margin: 0 0 8px;
+  color: #aaa79f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(14px, 1.05vw, 17px);
+  line-height: 1.7;
+}
+
+.sketchbook-page__description span,
+.sketchbook-page__description small { display: block; }
+.sketchbook-page__description small {
+  margin-top: 8px;
+  color: #6f6c66;
+  font-family: "Aptos Mono", "Cascadia Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: .12em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.sketchbook-grid {
+  columns: 3 280px;
+  column-gap: clamp(24px, 3.4vw, 56px);
+}
+
+.sketchbook-item {
+  break-inside: avoid;
+  margin: 0 0 clamp(44px, 5vw, 76px);
+}
+
+.sketchbook-item button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.sketchbook-item button:focus-visible {
+  outline: 1px solid var(--copper);
+  outline-offset: 8px;
+}
+
+.sketchbook-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: .94;
+  transition: opacity 220ms ease, transform 420ms cubic-bezier(.16,1,.3,1);
+}
+
+.sketchbook-item button:hover img,
+.sketchbook-item button:focus-visible img {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.sketchbook-item figcaption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+  margin-top: 15px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(237,233,223,.11);
+}
+
+.sketchbook-item figcaption div,
+.sketchbook-item figcaption strong,
+.sketchbook-item figcaption span { display: block; }
+.sketchbook-item figcaption strong { font-size: 11px; font-weight: 400; letter-spacing: .09em; }
+.sketchbook-item figcaption span { margin-top: 5px; color: #74716b; font-size: 8px; letter-spacing: .13em; text-transform: uppercase; }
+.sketchbook-item figcaption p { margin: 1px 0 0; color: #74716b; font-size: 8px; line-height: 1.5; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
+
+.sketchbook-empty {
+  min-height: min(44vh, 430px);
+  padding-top: clamp(42px, 5vw, 72px);
+  border-top: 1px solid rgba(237,233,223,.09);
+}
+
+.sketchbook-empty p { margin: 0; color: #aaa79f; font-family: Georgia, "Times New Roman", serif; font-size: clamp(16px, 1.2vw, 19px); }
+.sketchbook-empty span { display: block; margin-top: 13px; color: #5f5d58; font-size: 8px; letter-spacing: .2em; text-transform: uppercase; }
+
+.sketchbook-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  padding: clamp(72px, 8vw, 112px) clamp(24px, 5vw, 80px) 48px;
+  background: rgba(5,5,4,.97);
+  cursor: zoom-out;
+}
+
+.sketchbook-viewer__close {
+  position: fixed;
+  z-index: 2;
+  top: 30px;
+  right: clamp(24px, 4.35vw, 72px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: #aaa79f;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.sketchbook-viewer__close:hover,
+.sketchbook-viewer__close:focus-visible { color: var(--bone); }
+.sketchbook-viewer__close:focus-visible { outline: 1px solid var(--copper); outline-offset: 7px; }
+.sketchbook-viewer__close svg { width: 16px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+
+.sketchbook-viewer__figure {
+  width: min(1380px, 100%);
+  margin: auto;
+  cursor: default;
+}
+
+.sketchbook-viewer__figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 76vh;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.sketchbook-viewer__figure figcaption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px 38px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(237,233,223,.13);
+}
+
+.sketchbook-viewer__titles strong,
+.sketchbook-viewer__titles span { display: block; }
+.sketchbook-viewer__titles strong { font-size: 13px; font-weight: 400; letter-spacing: .1em; }
+.sketchbook-viewer__titles span { margin-top: 6px; color: #77746e; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.sketchbook-viewer__figure figcaption > p { margin: 1px 0 0; color: #77746e; font-size: 9px; line-height: 1.6; letter-spacing: .11em; text-align: right; text-transform: uppercase; }
+.sketchbook-viewer__figure .sketchbook-viewer__description { grid-column: 1 / -1; max-width: 720px; color: #aaa79f; font-family: Georgia, "Times New Roman", serif; font-size: 14px; letter-spacing: 0; line-height: 1.75; text-align: left; text-transform: none; }
 
 .about-page {
   position: absolute;
@@ -477,22 +727,8 @@ button { color: inherit; }
 
 .about-page__identity h1 {
   margin: 0;
-  font-size: clamp(58px, 6.1vw, 98px);
   font-weight: 400;
-  line-height: .8;
-  letter-spacing: -.07em;
-  text-transform: uppercase;
-}
-
-.about-page__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  color: #77746e;
-  font-size: 9px;
-  letter-spacing: .2em;
-  line-height: 1.4;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
 .about-page__links {
@@ -597,14 +833,9 @@ button { color: inherit; }
 .contact-page__intro h1 {
   margin: 0;
   max-width: 540px;
-  font-size: clamp(48px, 4.55vw, 74px);
   font-weight: 400;
-  line-height: .96;
-  letter-spacing: -.045em;
-  text-transform: uppercase;
+  line-height: 1;
 }
-
-.contact-page__intro h1 span { display: block; white-space: nowrap; }
 
 .contact-page__email {
   display: flex;
@@ -824,6 +1055,88 @@ button { color: inherit; }
 }
 .project-detail__close svg { width: 17px; fill: none; stroke: currentColor; stroke-width: 1.2; }
 
+.project-intro {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: clamp(104px, 13vh, 150px) clamp(42px, 7vw, 112px) clamp(84px, 10vh, 124px);
+  background: #0b0b0a;
+}
+
+.project-intro__content {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 48vw);
+}
+
+.project-intro__title {
+  max-width: 9em;
+  margin: 0;
+  font-size: clamp(48px, 5.7vw, 88px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: .035em;
+  overflow-wrap: anywhere;
+}
+
+.project-intro__title-en {
+  max-width: 34em;
+  margin: 22px 0 0;
+  color: #aaa79f;
+  font-size: clamp(12px, 1.15vw, 17px);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.project-intro__meta {
+  display: grid;
+  gap: 8px;
+  margin-top: clamp(40px, 5vh, 58px);
+  color: #8f8c85;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .16em;
+}
+
+.project-intro__meta p { margin: 0; }
+
+.project-intro__statement {
+  margin-top: clamp(48px, 7vh, 76px);
+}
+
+.project-intro__statement-label {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin: 0 0 22px;
+  color: #aaa79f;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .18em;
+}
+
+.project-intro__statement-label span:last-child {
+  color: #68665f;
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.project-intro__statement-copy {
+  max-width: 38em;
+  margin: 0;
+  color: #cfcbc2;
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  font-size: clamp(14px, 1.05vw, 17px);
+  font-weight: 300;
+  line-height: 2;
+  letter-spacing: .045em;
+}
+
 .project-detail__gallery {
   position: relative;
   padding: clamp(54px, 6vw, 96px) clamp(24px, 4.35vw, 72px) 110px;
@@ -859,28 +1172,45 @@ button { color: inherit; }
   .portfolio-shell { min-height: 520px; }
   .layout-grid { inset: 0 16px; }
   .site-header { height: 78px; padding: 0 24px; }
-  .site-header nav { gap: 20px; font-size: 9px; }
-  .identity-panel { left: 24px; top: 25%; width: 62vw; }
-  .identity-panel h1 { font-size: clamp(48px, 12.5vw, 72px); line-height: .84; }
-  .degree { margin-top: 25px; font-size: 11px; }
+  .site-header nav { gap: 20px; font-size: 11px; }
+  .site-header nav a { gap: 3px; }
+  .site-header nav a small { font-size: 8px; }
+  .identity-panel { left: 24px; top: 25%; width: calc(100vw - 48px); }
+  .identity-title__zh { font-size: clamp(30px, 8.5vw, 46px); }
+  .identity-title__en { margin-top: 11px; font-size: 11px; }
+  .degree { margin-top: 24px; }
+  .degree__en { font-size: 9px; }
+  .degree__zh { font-size: 12px; }
   .globe-stage { inset: 13% -26% -5% 3%; }
   .globe-stage { -webkit-mask-image: none; mask-image: none; }
-  .work-label { left: 24px; bottom: 72px; font-size: 8px; }
-  .city-line { left: 24px; bottom: 34px; font-size: 7px; }
+  .work-label { left: 24px; bottom: 34px; font-size: 8px; }
   .project-count { display: none; }
   .project-preview { width: min(300px, calc(100vw - 32px)); }
   .projects-index { padding: 105px 24px 60px; }
+  .sketchbook-page { padding: 105px 24px 60px; }
+  .sketchbook-page__intro { align-items: flex-start; flex-direction: column; margin-bottom: 64px; }
+  .sketchbook-page__title-zh { font-size: clamp(44px, 13vw, 58px); }
+  .sketchbook-page__title-en { margin-top: 12px; font-size: clamp(14px, 4vw, 18px); }
+  .sketchbook-page__description { max-width: 520px; }
+  .sketchbook-grid { columns: 2 220px; }
+  .sketchbook-viewer { place-items: start center; padding: 82px 18px 34px; }
+  .sketchbook-viewer__close { top: 21px; right: 24px; }
+  .sketchbook-viewer__figure img { max-height: 72svh; }
+  .sketchbook-viewer__figure figcaption { grid-template-columns: 1fr; }
+  .sketchbook-viewer__figure figcaption > p { text-align: left; }
   .projects-index__intro { align-items: flex-start; margin-bottom: 46px; }
-  .projects-index__intro h1 { font-size: clamp(54px, 17vw, 84px); }
-  .projects-index__intro .projects-index__note { display: none; }
+  .projects-index__title-zh,
+  .about-page__title-zh,
+  .contact-page__title-zh { font-size: clamp(44px, 13vw, 58px); }
+  .projects-index__title-en,
+  .about-page__title-en,
+  .contact-page__title-en { margin-top: 12px; font-size: clamp(14px, 4vw, 18px); }
   .projects-grid { grid-template-columns: 1fr; gap: 48px; }
   .about-page {
     display: block;
     padding: 116px 24px 64px;
   }
   .about-page__identity { min-height: auto; }
-  .about-page__identity h1 { font-size: clamp(52px, 16vw, 72px); }
-  .about-page__meta { margin-top: 52px; }
   .about-page__copy {
     margin-top: 52px;
     padding: 42px 0 0;
@@ -893,29 +1223,39 @@ button { color: inherit; }
     padding: 116px 24px 56px;
   }
   .contact-page__intro { min-height: auto; padding: 0; }
-  .contact-page__intro h1 { font-size: clamp(46px, 12.5vw, 62px); }
   .contact-page__email { margin-top: 48px; }
   .contact-form { margin-top: 54px; padding: 28px 22px; }
   .contact-form__row { grid-template-columns: 1fr; }
   .contact-form__submit-row { align-items: flex-start; flex-direction: column; }
   .project-detail__close { top: 22px; right: 22px; }
+  .project-intro {
+    align-items: flex-start;
+    min-height: 100svh;
+    padding: 112px 24px 76px;
+  }
+  .project-intro__content { width: 100%; }
+  .project-intro__title { max-width: 10em; font-size: clamp(42px, 13vw, 64px); }
+  .project-intro__title-en { max-width: calc(100vw - 80px); margin-top: 16px; font-size: 11px; }
+  .project-intro__meta { max-width: calc(100vw - 48px); margin-top: 34px; }
+  .project-intro__statement { margin-top: 46px; }
+  .project-intro__statement-copy { max-width: 34em; font-size: 14px; line-height: 1.9; }
   .project-detail__gallery { padding: 38px 16px 64px; }
 }
 
 @media (max-height: 670px) and (min-width: 901px) {
   .identity-panel { top: 38%; }
-  .identity-panel h1 { font-size: 76px; }
   .degree { margin-top: 25px; }
-  .work-label { bottom: 78px; }
-  .city-line { bottom: 38px; }
+  .work-label { bottom: 38px; }
 }
 
 .portfolio-shell.page-transition--leaving > .hero,
 .portfolio-shell.page-transition--leaving > .projects-index,
+.portfolio-shell.page-transition--leaving > .sketchbook-page,
 .portfolio-shell.page-transition--leaving > .about-page,
 .portfolio-shell.page-transition--leaving > .contact-page,
 .portfolio-shell.page-transition--entering > .hero,
 .portfolio-shell.page-transition--entering > .projects-index,
+.portfolio-shell.page-transition--entering > .sketchbook-page,
 .portfolio-shell.page-transition--entering > .about-page,
 .portfolio-shell.page-transition--entering > .contact-page {
   pointer-events: none;
@@ -924,6 +1264,7 @@ button { color: inherit; }
 
 .portfolio-shell.page-transition--leaving.page-motion--forward > .hero,
 .portfolio-shell.page-transition--leaving.page-motion--forward > .projects-index,
+.portfolio-shell.page-transition--leaving.page-motion--forward > .sketchbook-page,
 .portfolio-shell.page-transition--leaving.page-motion--forward > .about-page,
 .portfolio-shell.page-transition--leaving.page-motion--forward > .contact-page {
   animation: page-forward-out 620ms cubic-bezier(.4,0,.2,1) both;
@@ -931,6 +1272,7 @@ button { color: inherit; }
 
 .portfolio-shell.page-transition--leaving.page-motion--backward > .hero,
 .portfolio-shell.page-transition--leaving.page-motion--backward > .projects-index,
+.portfolio-shell.page-transition--leaving.page-motion--backward > .sketchbook-page,
 .portfolio-shell.page-transition--leaving.page-motion--backward > .about-page,
 .portfolio-shell.page-transition--leaving.page-motion--backward > .contact-page {
   animation: page-backward-out 620ms cubic-bezier(.4,0,.2,1) both;
@@ -938,6 +1280,7 @@ button { color: inherit; }
 
 .portfolio-shell.page-transition--entering.page-motion--forward > .hero,
 .portfolio-shell.page-transition--entering.page-motion--forward > .projects-index,
+.portfolio-shell.page-transition--entering.page-motion--forward > .sketchbook-page,
 .portfolio-shell.page-transition--entering.page-motion--forward > .about-page,
 .portfolio-shell.page-transition--entering.page-motion--forward > .contact-page {
   animation: page-forward-in 900ms cubic-bezier(.16,1,.3,1) both;
@@ -945,6 +1288,7 @@ button { color: inherit; }
 
 .portfolio-shell.page-transition--entering.page-motion--backward > .hero,
 .portfolio-shell.page-transition--entering.page-motion--backward > .projects-index,
+.portfolio-shell.page-transition--entering.page-motion--backward > .sketchbook-page,
 .portfolio-shell.page-transition--entering.page-motion--backward > .about-page,
 .portfolio-shell.page-transition--entering.page-motion--backward > .contact-page {
   animation: page-backward-in 900ms cubic-bezier(.16,1,.3,1) both;
