@@ -1,4 +1,5 @@
 import { memo, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 function SketchbookViewer({ item, onClose }) {
   const closeButtonRef = useRef(null);
@@ -28,7 +29,8 @@ function SketchbookViewer({ item, onClose }) {
   const metadata = [item.year, item.location, item.type].filter(Boolean);
   const accessibleTitle = item.titleZh || item.title || '速写本作品';
 
-  return (
+  // Escape the page's animated stacking context so the viewer stays above navigation.
+  return createPortal(
     <div
       className="sketchbook-viewer"
       role="dialog"
@@ -61,7 +63,8 @@ function SketchbookViewer({ item, onClose }) {
           {item.descriptionZh ? <p className="sketchbook-viewer__description">{item.descriptionZh}</p> : null}
         </figcaption>
       </figure>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
